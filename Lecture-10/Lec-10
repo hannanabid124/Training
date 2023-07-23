@@ -1,0 +1,75 @@
+'''day = int(input("Please enter day of week:\n"))
+if (day > 0):
+ if(day<8):
+   print("This is a valid day")
+ else:
+   print("Invalid")
+else:
+ print("Invalid")'''
+ 
+'''import random
+while True:
+ val = random.randint(1,20)
+ans = input("What is the square of "+str(val)+"?") ------ Didn't Show output --------
+val = int(val)
+ans = int(ans)
+if val*val == ans:
+ print("Correct.") 
+else:
+ print("Incorrect Answer")'''
+ 
+    
+'''import random
+
+hidden = 12
+lower_limit = 1
+upper_limit = 20
+
+while True:
+    try:
+        x = int(input(f"Please enter a guess between 1 to 20: ")) ------ Hidden value = 12
+        if lower_limit <= x <= upper_limit:
+            if x < hidden:
+                print("Too low")
+            elif x > hidden:
+                print("Too high")
+            else:
+                print("Congratulations, you've guessed it right.")
+                break
+        else:
+            print("Invalid entry. Please enter a number within the specified range.")
+    except ValueError:
+        print("Invalid entry. Please enter a valid number.")'''
+        
+import random
+
+lower_limit = 1
+upper_limit = 20
+score = 0
+
+while True:
+    hidden = random.randint(lower_limit, upper_limit)
+
+    while True:
+        try:
+            x = int(input(f"Please enter a guess between 1 to 20: "))
+            if lower_limit <= x <= upper_limit:
+                if x < hidden:
+                    print("Too low")
+                    score-=1
+                elif x > hidden:
+                    print("Too high")   
+                    score-=1  
+                else:
+                    score += 5
+                    print("Congratulations, you've guessed it right.")
+                    print("Your current score is: {}".format(score))                    
+                    break
+            else:
+                print("Invalid entry. Please enter a number within the specified range.")
+        except ValueError:
+            print("Invalid entry. Please enter a valid number.")
+
+
+ 
+ 
