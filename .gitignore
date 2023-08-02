@@ -2,3 +2,4 @@ weatherfiles/*.txt
 *.txt
 Murree_weather_2016_Sep.tsv
 Murree_weather_2016_May.xlsx
+.DS_Store
