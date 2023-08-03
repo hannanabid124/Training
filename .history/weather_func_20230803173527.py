@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 def process_weather_data(file_path):
     
     """
-    This function process weather data from a CSV file and find maximum temperature, minimum temperature,
+    Process weather data from a CSV file and find maximum temperature, minimum temperature,
     and maximum humidity along with their corresponding dates.
 
     Parameters:
@@ -203,3 +203,4 @@ def draw_horizontal_bar_chart(max_temp, min_temp):
     plt.ylabel('Temperature Type')
     plt.title('Highest and Lowest Temperatures')
     plt.show()
+
