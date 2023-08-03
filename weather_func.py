@@ -15,7 +15,8 @@ def process_weather_data(file_path):
             data_list.append(row)
 
     highestTemperature = 'Max TemperatureC'
-    # Har row k andr heighest temp kis row main para hoga .. This index will be used to access the maximum temperature values in each row.
+    # Har row k andr hghst temp kis row main pra hga
+    # This index will be used to access the max temp values in each row.
     highestTemperature_index = data_list[0].index(highestTemperature)
 
     lowestTemperature = 'Min TemperatureC'
@@ -28,33 +29,44 @@ def process_weather_data(file_path):
         highestTemperature_index,
         lowestTemperature_index,
         highestHumidity_index]
-    
 
     # Filter data list and keeps all data(rows) that is "in coloumn to check"
     data_list = [row for row in data_list if all(row[col]
-                                                 for col in columns_to_check)]
+                                                for col in columns_to_check)]
 
 # Extract maximum values from each row
-    column_values = [float(each_row[highestTemperature_index]) 
+    column_values = [float(each_row[highestTemperature_index])
+                                                        for each_row in data_list[1:]]
+
+# Finding max in in coloumn values
+    max_temperature_value = max(column_values)
+# Finds index of max temp value in coloumn value list.
+    max_temperature_value_index = column_values.index(max_temperature_value)
+# Extracts the row corresponding to max temp value.
+    max_temperature_row = data_list[max_temperature_value_index + 1]
+
+    column_values = [float(each_row[lowestTemperature_index]) 
                      for each_row in data_list[1:]]
-
-    max_temperature_value = max(column_values) # Finding max in in coloumn values
-    max_temperature_value_index = column_values.index(max_temperature_value) # Finds index of max temp value in coloumn value list.
-    max_temperature_row = data_list[max_temperature_value_index + 1] # Extracts the row corresponding to max temp value.
-
-    column_values = [float(each_row[lowestTemperature_index]) for each_row in data_list[1:]]
     min_temperature_value = min(column_values)
     min_temperature_value_index = column_values.index(min_temperature_value)
     min_temperature_row = data_list[min_temperature_value_index + 1]
 
-    column_values = [int(each_row[highestHumidity_index]) for each_row in data_list[1:]]
+    column_values = [int(each_row[highestHumidity_index]) 
+                     for each_row in data_list[1:]]
     max_humidity_value = max(column_values)
     max_humidity_value_index = column_values.index(max_humidity_value)
     max_humidity_row = data_list[max_humidity_value_index + 1]
     
     print("Data List:", data_list)
 
-    return max_temperature_value, max_temperature_row[0], min_temperature_value, min_temperature_row[0], max_humidity_value, max_humidity_row[0]
+    return (
+max_temperature_value,
+max_temperature_row[0],
+min_temperature_value,
+min_temperature_row[0],
+max_humidity_value,
+max_humidity_row[0]
+)
 
 
 def process_all_files_in_folder(folder_path, year):
@@ -85,13 +97,12 @@ def process_all_files_in_folder(folder_path, year):
     print('Highest Temperature:', max_temp_all_files, "C on", max_temp_date)
     print('Lowest Temperature:', min_temp_all_files, "C on", min_temp_date)
     print('Highest Humidity:', max_humidity_all_files, "% on", max_humidity_date)
-    
+
     draw_horizontal_bar_chart(max_temp_all_files, min_temp_all_files)
 
-    
 def calculate_average_values(folder_path, year, month):
     months = {'01': "Jan", '02': "Feb", '03': "Mar", '04': "Apr", '05': "May", '06': "Jun",
-              '07': "Jul", '08': "Aug", '09': "Sep", '10': "Oct", '11': "Nov", '12': "Dec"}
+            '07': "Jul", '08': "Aug", '09': "Sep", '10': "Oct", '11': "Nov", '12': "Dec"}
 
     if month in months:
         month = months[month]
@@ -121,7 +132,7 @@ def calculate_average_values(folder_path, year, month):
         average_high_temp = total_high_temp / count
         average_low_temp = total_low_temp / count
         average_humidity = total_humidity / count
-        
+
         print('Average Highest Temperature:', average_high_temp, "C")
         print('Average Lowest Temperature:', average_low_temp, "C")
         print('Average Humidity:', average_humidity, "%")
@@ -130,8 +141,20 @@ def draw_horizontal_bar_chart(max_temp, min_temp):
     max_temp_float = float(max_temp)
     min_temp_float = float(min_temp)
 
-    plt.barh(['Max Temperature', 'Min Temperature'], [max_temp_float, min_temp_float], color=['red', 'blue'])
+    plt.barh(['Max Temperature', 'Min Temperature'], 
+             [max_temp_float, min_temp_float], 
+             color=['red', 'blue'])
     plt.xlabel('Temperature (°C)')
     plt.ylabel('Temperature Type')
     plt.title('Highest and Lowest Temperatures')
     plt.show()
+
+
+def get_temperature_and_humidity_data():
+
+
+    '''Janab we created a Weather Man program in which we 
+    can calculate highest temp, lowest temp, avg humd and
+    we can plot their graphs too..'''
+
+pass

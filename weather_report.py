@@ -1,6 +1,5 @@
 import argparse
 import os
-import re
 from weather_func import draw_horizontal_bar_chart, process_all_files_in_folder, calculate_average_values
 
 def main():
